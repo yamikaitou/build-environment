@@ -1,0 +1,1 @@
+Compiler for AMX Mod X version 1.8.2
