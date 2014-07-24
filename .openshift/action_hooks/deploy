@@ -1,0 +1,7 @@
+rm -rf $OPENSHIFT_DATA_DIR/builders
+mkdir $OPENSHIFT_DATA_DIR/builders
+chmod +x $OPENSHIFT_DATA_DIR/builders/amxx/release/amxxpc
+chmod +x $OPENSHIFT_DATA_DIR/builders/amxx/dev/amxxpc
+chmod +x $OPENSHIFT_DATA_DIR/builders/sm/release/spcomp
+chmod +x $OPENSHIFT_DATA_DIR/builders/sm/dev1/spcomp
+chmod +x $OPENSHIFT_DATA_DIR/builders/sm/dev2/spcomp

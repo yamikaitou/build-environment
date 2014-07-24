@@ -1,5 +1,0 @@
-chmod +x $OPENSHIFT_REPO_DIR/amxx/release/amxxpc
-chmod +x $OPENSHIFT_REPO_DIR/amxx/dev/amxxpc
-chmod +x $OPENSHIFT_REPO_DIR/sm/release/spcomp
-chmod +x $OPENSHIFT_REPO_DIR/sm/dev1/spcomp
-chmod +x $OPENSHIFT_REPO_DIR/sm/dev2/spcomp
