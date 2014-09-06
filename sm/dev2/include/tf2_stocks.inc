@@ -249,6 +249,7 @@ enum {
 	TF_WEAPON_SPELLBOOK,
 	TF_WEAPON_SPELLBOOK_PROJECTILE,
 	TF_WEAPON_SNIPERRIFLE_CLASSIC,
+	TF_WEAPON_PARACHUTE,
 };
 
 // TF2 Weapon Loadout Slots
@@ -335,19 +336,19 @@ stock TFClassType:TF2_GetPlayerClass(client)
  * Note: If setting player class in a player spawn hook weapons should be set to false.
  *
  * @param client		Player's index.
- * @param class			TFClassType class symbol.
+ * @param classType		TFClassType class symbol.
  * @param weapons		This paramater is ignored.
  * @param persistent	If true changes the players desired class so the change stays after death.
  * @noreturn
  * @error				Invalid client index.
  */
-stock TF2_SetPlayerClass(client, TFClassType:class, bool:weapons=true, bool:persistent=true)
+stock TF2_SetPlayerClass(client, TFClassType:classType, bool:weapons=true, bool:persistent=true)
 {
-	SetEntProp(client, Prop_Send, "m_iClass", _:class);
+	SetEntProp(client, Prop_Send, "m_iClass", _:classType);
 	
 	if (persistent)
 	{
-		SetEntProp(client, Prop_Send, "m_iDesiredPlayerClass", _:class);
+		SetEntProp(client, Prop_Send, "m_iDesiredPlayerClass", _:classType);
 	}
 }
 
@@ -435,6 +436,20 @@ stock TF2_RemoveWeaponSlot(client, slot)
 	new weaponIndex;
 	while ((weaponIndex = GetPlayerWeaponSlot(client, slot)) != -1)
 	{
+		// bug #6206
+		// papering over a valve bug where a weapon's extra wearables aren't properly removed from the weapon's owner
+		new extraWearable = GetEntPropEnt(weaponIndex, Prop_Send, "m_hExtraWearable");
+		if (extraWearable != -1)
+		{
+			TF2_RemoveWearable(client, extraWearable);
+		}
+
+		extraWearable = GetEntPropEnt(weaponIndex, Prop_Send, "m_hExtraWearableViewModel");
+		if (extraWearable != -1)
+		{
+			TF2_RemoveWearable(client, extraWearable);
+		}
+
 		RemovePlayerItem(client, weaponIndex);
 		AcceptEntityInput(weaponIndex, "Kill");
 	}

@@ -1,1 +1,1 @@
-Compiler for SourceMod version 1.6.0
+Compiler for SourceMod version 1.6.1

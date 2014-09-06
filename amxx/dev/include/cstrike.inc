@@ -1,9 +1,15 @@
-/* Counter-Strike functions
-*
-* by the AMX Mod X Development Team
-*
-* This file is provided as is (no warranties).
-*/
+// vim: set ts=4 sw=4 tw=99 noet:
+//
+// AMX Mod X, based on AMX Mod by Aleksander Naszko ("OLO").
+// Copyright (C) The AMX Mod X Development Team.
+//
+// This software is licensed under the GNU General Public License, version 3 or higher.
+// Additional exceptions apply. For full license details, see LICENSE.txt or visit:
+//     https://alliedmods.net/amxmodx-license
+
+//
+// Counter-Strike Functions
+//
 
 #if defined _cstrike_included
   #endinput
@@ -357,7 +363,7 @@ forward CS_InternalCommand(id, const cmd[]);
 
 
 /**
- * The following constants are used with CS_OnBuy forward.
+ * The following constants are used with CS_OnBuy[Attempt] forwards.
  */
 #define CSI_P228				CSW_P228
 #define CSI_SCOUT				CSW_SCOUT
@@ -397,7 +403,20 @@ forward CS_InternalCommand(id, const cmd[]);
 
 /**
  * Called when a player attempts to purchase an item.
- * Return PLUGIN_CONTINUE to allow the purchase or return a higher action to deny.
+ * This is ususally called right away on buy commands issued by a player.
+ * 
+ * @note Return PLUGIN_CONTINUE to allow the purchase or return a higher action to deny.
+ *
+ * @param index			Player index.
+ * @param item			Item index, see CSI_* constants.
+ */
+forward CS_OnBuyAttempt(index, item);
+
+/**
+ * Called when a player purchases an item.
+ * This usually called right before a player gets the purchased item.
+ *
+ * @note Return PLUGIN_CONTINUE to allow the purchase or return a higher action to deny.
  *
  * @param index			Player index.
  * @param item			Item index, see CSI_* constants.

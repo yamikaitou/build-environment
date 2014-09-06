@@ -1,1 +1,1 @@
-Compiler for SourceMod version 1.6.1-dev-git4526
+Compiler for SourceMod version 1.6.2-dev-git4560

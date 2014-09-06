@@ -78,11 +78,11 @@ native Handle:CloneHandle(Handle:hndl, Handle:plugin=INVALID_HANDLE);
 /**
  * Helper for object-oriented syntax.
  */
-methodmap Handle
+methodmap Handle __nullable__
 {
 	public Clone() = CloneHandle;
 	public ~Handle() = CloseHandle;
-};
+}
 
 /**
  * Do not use this function.  Returns if a Handle and its contents 
